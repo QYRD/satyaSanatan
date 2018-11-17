@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,17 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Veda Project</title>
+    <title>Upload Document</title>
 
     <!-- Bootstrap -->
-     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/veda.css">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"> 
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    
+  <link rel="stylesheet" type="text/css" href="css/veda.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
    
   </head>
   <body  style="font-family: 'Quicksand', sans-serif;">
@@ -33,13 +30,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="home.html"><img class="img-responsive" src="image/adi-shankara-logo.png" width="100%"></a>
+      <a class="navbar-brand" href="home.html"><img class="img-responsive" src="img/adi-shankara-logo.png" width="100%"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">   
      
        <ul class="nav navbar-nav navbar-right">
+	      <li class="courselist_link"><a href="home">Home</a></li>
 	      <li class="courselist_link"><a href="About_Us">About</a></li>
 	      <li class="courselist_link"><a href="Contact_US">Contact Us</a></li>
 	      <li class="courselist_link"><a href="Upload_document">Upload File</a></li>
@@ -55,7 +53,7 @@
         <div class="col-md-12">
           <p style="color: #222; font-size: 19px;">A Team of individual software developers who want to develop a platform to boost interest of this generation towards spirituality. The purpose is to create repository of Indian Texts and serve as a one stop shop of</p>
             <div class="well well-sm">
-                <form action="Upload_document">
+                <form>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -63,41 +61,40 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="fa fa-user fa-lg fa-fw" aria-hidden="true"></span>
                                 </span>
-                                <input type="name" class="form-control" name="name" placeholder="Enter Full Name" required="required" /></div>
+                                <input type="name" class="form-control" autocomplete="off" id="name" placeholder="Enter Full Name" required="required" /></div>
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></span>
                                 </span>
-                                <input type="email" class="form-control" name="mail" placeholder="Enter Email Address" required="required" /></div>
+                                <input type="email" class="form-control" autocomplete="off" id="email" placeholder="Enter Email Address" required="required" /></div>
                         </div>
                         <div class="form-group">
                             <label for="Mobilenumber">Mobile Number</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><span  class="fa fa-mobile fa-lg fa-fw" aria-hidden="true"></span>
                                 </span>
-                                <input type="mobile" class="form-control" maxlength="15" minlength="10" name="mobile" placeholder="Enter Mobile Number" required="required" /></div>
+                                <input type="mobile" class="form-control" autocomplete="off" maxlength="15" minlength="10" id="mobile" placeholder="Enter Mobile Number" required="required" /></div>
                         </div>
-                       <!--  <div class="form-group">
-                            <label for="name">Mobile Number</label>
-                            <input type="text" class="form-control" id="mobile" placeholder="Enter Mobile Number" required="required" />
-                        </div> -->
+                     
                         <div class="form-group">
                             <label class="newbtn blah" for="subject">Upload File</label>
-                            <input name="fileName" class='pis' onchange="readURL(this);" type="file" accept=".png,.jpg,.jpeg,.pdf" >
+                            <input id="pic" class='pis' onchange="readURL(this);" type="file" accept=".png,.jpg,.jpeg,.pdf,.docx" >
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Description</label>
-                            <textarea name="fileDiscription"  class="form-control" rows="9" cols="25" required="required"
+                            <textarea name="description" id="description" class="form-control" rows="9" cols="25" required="required"
                                 placeholder="Write Description here.."></textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">Send Message</button>
+                        <button type="submit" class="btn btn-success pull-right" id="btnContactUs">Submit</button>
+                        <button type="reset" value="Reset Form" onClick="this.form.reset()" class="btn btn-danger pull-right" id="btnDelete" style="margin-right:5px">Reset</button>
                     </div>
+                    
                 </div>
                 </form>
             </div>
@@ -109,23 +106,32 @@
 </div>
 
 <div class="veda-footer">
+<div class="container">
 	<div class="footer">
 		<p>© Copyright 2018. All Rights Reserved.</p>
 	</div>
 </div>
+</div>
 
+<style>
+
+.navbar-default .navbar-nav > li > a{
+	color:#fff;
+	font-size:18px;
+}
+
+</style>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
      <script src="js/bootstrap.js"></script>
 
-  <script>
+     <script>
  
-       $('.newbtn').bind("click" , function () {
+ $('.newbtn').bind("click" , function () {
         $('#pic').click();
  });
  
@@ -142,5 +148,6 @@
             }
         }
 </script>
+     
   </body>
 </html>

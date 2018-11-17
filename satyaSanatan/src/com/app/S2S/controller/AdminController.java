@@ -21,9 +21,13 @@ import com.app.S2S.service.S2SGenricClass;
 import com.app.S2S.service.UserDataValue;
 import com.app.S2S.beans.LoginDetails;
 import com.app.S2S.beans.Maicategory;
+import com.app.S2S.beans.SubCategory;
 
 @Controller
 public class AdminController {
+	@Autowired
+	AdminController contrl;
+
 	@Autowired
 	UserDataValue udv;
 	@Autowired
@@ -35,6 +39,7 @@ public class AdminController {
 	String fileURL;
 
 	private HttpSession session;
+
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public String ragistration(HttpServletRequest request) {
 		System.out.println("________________________"+fileURL);
@@ -46,26 +51,27 @@ public class AdminController {
 		System.out.println("-----------------------S2S----------------------------------");
 		return "AdminDashboard";
 	}
+
+	@RequestMapping(value = "Dashboard", method = RequestMethod.GET)
+	public String dashboard(HttpServletRequest request) {
+		System.out.println("-----------------------S2S----------------------------------");
+		return "Dashboard";
+	}
 	@RequestMapping(value = "Add-Main-Category", method = RequestMethod.GET)
 	public String addMainCategory(HttpServletRequest request,@ModelAttribute("mainCat") Maicategory mainCat) {
 		List<Maicategory> ls = udv.getMainCategory();
 		request.setAttribute("maincatValues", ls);
-
 		System.out.println("-----------------------S2S----------------------------------");
 		return "AddCategory";
 	}
-
-
-
+	
 	@RequestMapping(value = "Add-Main-Category-Value", method = RequestMethod.POST)
 	public String addMainCategoryValue(HttpServletRequest request,@ModelAttribute("mainCat") Maicategory mainCat) {
-		System.out.println("Shikhar YOU ID IS "+mainCat.getId());
-		
 		try {
 			Maicategory mc=(Maicategory) s2s.saveFile(mainCat.getFiles(), path, mainCat, "newFile");
 		mainCat.setFileName(mc.getFileName());
 		mainCat.setFilePath(mc.getFilePath()); 
-		udv.saveCategory(mainCat);
+		udv.saveMainCategory(mainCat);
 
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
@@ -79,7 +85,6 @@ public class AdminController {
 	public @ResponseBody int deleteMainCat(HttpServletRequest request, @RequestParam("val") int id) {
 		int pas=0;
 		try{
-		System.out.println("hello"+id);
 		udv.deleteMainCategory(id);
 		
 		}catch(Exception e){
@@ -96,9 +101,45 @@ public class AdminController {
 
 	
 	@RequestMapping(value = "Add-Sub-Category", method = RequestMethod.GET)
-	public String addsubCategory(HttpServletRequest request) {
-		System.out.println("-----------------------S2S----------------------------------");
+	public String addsubCategory(HttpServletRequest request) {	
+		request.setAttribute("val", request.getParameter("id"));
+		List<SubCategory> ls = udv.getSubCategoryByID(request.getParameter("id"));
+		request.setAttribute("subcatValues", ls);
 		return "subCategory";
+	}
+
+	@RequestMapping(value = "Add-Sub-Category-Value", method = RequestMethod.POST)
+	public String addSubCategoryValue(HttpServletRequest request,@ModelAttribute("subCat") SubCategory subCat) {
+		try {
+			SubCategory sc=(SubCategory) s2s.saveFile(subCat.getFiles(), path, subCat, "newFile");
+		subCat.setFileName(sc.getFileName());
+		subCat.setFilePath(sc.getFilePath()); 
+		udv.saveSubCategory(subCat);
+
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		String id=request.getParameter("val");
+		request.setAttribute("val", request.getParameter("id"));
+		List<SubCategory> ls = udv.getSubCategoryByID(request.getParameter("id"));
+		request.setAttribute("subcatValues", ls);
+		return contrl.addsubCategory(request);
+	}
+	
+	@RequestMapping(value = "deleteSubCat", method = RequestMethod.POST)
+	public @ResponseBody int deleteSubCat(HttpServletRequest request, @RequestParam("val") int id) {
+		int pas=0;
+		try{
+		udv.deleteSubCategory(id);
+		
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return pas;
+	}
+	@RequestMapping(value = "Get-Sub-Category", method = RequestMethod.POST)
+	public @ResponseBody SubCategory getSubCategory(HttpServletRequest request,@RequestParam("val") int id) {
+		return udv.getSubCategory(id);
 	}
 
 	
@@ -151,8 +192,15 @@ public class AdminController {
 	@RequestMapping(value = "loginPerson", method = RequestMethod.GET)
 	public String loginPerson(HttpServletRequest request,@ModelAttribute("login") LoginDetails login) {
 		System.out.println("-----------------------S2S----------------------------------");
+		int value=udv.login(login);
+		if(value!=0)
+		{
 		List<LoginDetails>auth=udv.loginId(login);
-		return "AdminDashboard";
-	}
-	
+		LoginDetails ld=auth.get(0);
+		session.setAttribute("userObj",ld.getId());
+		return "Dashboard";
+		}
+		request.setAttribute("errorMessage","Username or Password is incorrect." );
+		return "login";
+	}		
 }

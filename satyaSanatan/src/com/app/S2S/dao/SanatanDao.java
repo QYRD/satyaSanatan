@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.app.S2S.beans.LoginDetails;
 import com.app.S2S.beans.Maicategory;
+import com.app.S2S.beans.SubCategory;
 import com.app.S2S.beans.AddUserDocument;
 import com.app.S2S.beans.ContactUs;
 @Repository
@@ -46,7 +47,7 @@ sessionFactory.getCurrentSession().saveOrUpdate(contact);
 	}
 	
 	@Override
-	public void saveCategory(Maicategory mainCat) {
+	public void saveMainCategory(Maicategory mainCat) {
 		sessionFactory.getCurrentSession().saveOrUpdate(mainCat);		
 	}
 
@@ -54,19 +55,16 @@ sessionFactory.getCurrentSession().saveOrUpdate(contact);
 	public List<Maicategory> getMainCategory() {
 	Query query = sessionFactory.getCurrentSession().createQuery("from Maicategory");
 	List<Maicategory> ls = ((org.hibernate.query.Query) query).list();
-		return ls;
+	return ls;	
 	}
+
 	public void deleteMainCategory(int id)
 	{
 	    try
 	    {           
-	    	System.out.println("Hello id is "+id);
-
 	    	Query query=sessionFactory.getCurrentSession().createQuery("delete from Maicategory where id=:val");  
 	        query.setParameter("val", id);
-	        query.executeUpdate();
-
-	        
+	        query.executeUpdate();        
 	    }
 	    catch(Exception e)
 	    {
@@ -76,7 +74,41 @@ sessionFactory.getCurrentSession().saveOrUpdate(contact);
 }
 	@Override
 	public Maicategory getMainCategory(int id) {
-			return sessionFactory.getCurrentSession().get(Maicategory.class,id);
+		return sessionFactory.getCurrentSession().get(Maicategory.class,id);
 	}
-    
+	
+	
+	@Override
+	public void saveSubCategory(SubCategory subCat) {
+		sessionFactory.getCurrentSession().saveOrUpdate(subCat);
+	}
+
+	@Override
+	public void deleteSubCategory(int id) {
+	    try
+	    {           
+	    	Query query=sessionFactory.getCurrentSession().createQuery("delete from SubCategory where id=:val");  
+	        query.setParameter("val", id);
+	        query.executeUpdate();        
+	    }
+	    catch(Exception e)
+	    {
+	        e.printStackTrace();
+	    }
+   
+		
+	}
+	@Override
+	public SubCategory getSubCategory(int id) {
+		return sessionFactory.getCurrentSession().get(SubCategory.class,id);
+	}
+
+	@Override
+	public List<SubCategory> getSubCategoryByID(String id) {
+		Query query = sessionFactory.getCurrentSession().createQuery("from SubCategory where mainCatId=:val" );
+		query.setParameter("val", id);
+		List<SubCategory> ls = ((org.hibernate.query.Query) query).list();
+		return ls;
+}
+
 }

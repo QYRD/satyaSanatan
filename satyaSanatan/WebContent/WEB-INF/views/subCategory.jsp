@@ -7,7 +7,59 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+function getdata(id){
+    var id = id;  
+	$.ajax({
+		
+		type : 'POST',
+		url : 'Get-Sub-Category',
+		data : { "val" : id },
+		dataType : 'JSON',
+		success : function(data) {
+			$('#catID').val(data.id);
+			$('#catName').val(data.catName);
+		 	$('#catTitle').val(data.catTitle);
+		 	$('#desc').val(data.catDiscription);
+		 	$('#myModal').modal('show');
+		},
+		error : function(request, status, error) {
+			alert(request.responseText);
+		}
+	}); 
+}
+
+function deletedata(id) {
+	var r = confirm('Are you sure to DELETE Entry?');
+    if (r == true) {
+	$.ajax({
+		
+		type : 'POST',
+		url : 'deleteSubCat',
+		data : {
+			"val" : id
+		},
+		dataType : 'JSON',
+		success : function(response) {
+			alert("Entry Deleted Successfully")
+			location.reload();
+		},
+		error : function(request, status, error) {
+			alert(request.responseText);
+		}
+	});
+    }
+    else {
+		alert("Not Deleted!");
+    }
+}
+
+</script>
 </head>
 <body>
 <div id="right-panel" class="right-panel">
@@ -124,12 +176,15 @@
                             <div class="card-header">
                                 <strong>Add Category</strong> <small> (Sub)</small>
                             </div>
+                            
+					<form action="Add-Sub-Category-Value"  enctype="multipart/form-data" method="post">		
+									<input type="hidden" name="mainCatId" id="mainid" value="${id}"/>        								
                             <div class="card-body card-block">
                                 <div class="form-group">
                                     <label class=" form-control-label">Category Name</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                        <input class="form-control">
+                                        <input type="text" name="catName" class="form-control" >
                                     </div>
                                     <small class="form-text text-muted">Category Title </small>
                                 </div>
@@ -137,7 +192,7 @@
                                     <label class=" form-control-label"> Category Title</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                                                                                <input class="form-control">
+                                         <input type="text" name="catTitle" class="form-control" >
                                         
                                     </div>
                                     <small class="form-text text-muted">ex. (999) 999-9999</small>
@@ -146,7 +201,7 @@
                                     <label class=" form-control-label">Category Discription</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-                                                                                <textarea class="form-control" rows="3"></textarea>
+                             <textarea type="text" name="catDiscription" class="form-control" rows="3" ></textarea>
                                         
                                     </div>
                                     <small class="form-text text-muted">Maximum 100 Words</small>
@@ -155,17 +210,18 @@
                                     <label class=" form-control-label">Upload Image</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-male"></i></div>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" name="files"  >
                                     </div>
                                     <small class="form-text text-muted">Only JPEG,jpg,png</small>
                                 </div>
                              
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input class="btn btn-info"  value="Submit" type="submit">
+                                        <input type="submit" value="Submit" class="btn btn-info"  >
                                     </div>
                                 </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                     
@@ -186,11 +242,29 @@
                       
                         <th>Category</th>
                         <th>Title</th>
-                        <th>Discription</th>
+                        <th>Description</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
+					<c:forEach var="a" items="${subcatValues}">
+                    <tr>
+                    <td>
+                    <img alt="image" src="/SatyaSanatan/${a.fileName}" >
+                    </td>
+                    <td>${a.catName}</td>
+                    <td>${a.catTitle}</td>
+                    <td>${a.catDiscription}</td>
+
+					<td>					
+              	<a href="javascript:void(0);" onclick="getdata('${a.id}')"><i class="fa fa-edit" style="font-size:24px"></i></a>
+					&nbsp;&nbsp;&nbsp;
+              	<a href="javascript:void(0);" onclick="deletedata('${a.id}')"><i class="fa fa-trash-o" style="font-size:24px"></i></a>
+                      	</td>
+														
+                    </tr>                    
+                    </c:forEach>
+					
                     </tbody>
                   </table>
                         </div>
@@ -205,6 +279,95 @@
 
     </div>
 </div>
-</div>
+
+<!-- Modal -->
+
+   <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">     
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Edit Information</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+                            <div class="card-body card-block">		
+		
+                    <form action="Add-Sub-Category-Value"  enctype="multipart/form-data" id="insertForm" method="post">
+						<input type="hidden" name="id" id="catID"/>
+                                    <small class="form-text text-muted">ex. (999) 999-9999</small>
+							<div class="form-group">
+                                    <label class=" form-control-label">Category Name</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+									<input type="text" name="CatName" class="form-control" id="catName">
+                                    </div>
+                                    <small class="form-text text-muted">Category Title </small>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label"> Category Title</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+									<input type="text" name="catTitle" class="form-control" id="catTitle">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Category Description</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-usd"></i></div>
+							
+							<textarea name="catDiscription" class="form-control" rows="3" id="desc"></textarea>
+                                        
+                                    </div>
+                                    <small class="form-text text-muted">Maximum 100 Words</small>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Upload Image</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-male"></i></div>
+                                        <input type="file" class="form-control" name="files" id="filePath" >
+                                    </div>
+                                    <small class="form-text text-muted">Only JPEG,jpg,png</small>
+                                </div>
+                             
+                                <div class="form-group">
+                                    <div class="input-group">
+    			    <input type="submit" value="Update" class="btn btn-info" id="update">
+                                    </div>
+                                    </div>
+			</form>									
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+        <div class="modal-body">
+		
+    </div>
+        </div>
+
+<!-- Modal end-->
+
+  <!-- Modal -->
+  <div class="modal fade" id="confirm" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <h3>Updated Successfully!</h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
 </body>
 </html>

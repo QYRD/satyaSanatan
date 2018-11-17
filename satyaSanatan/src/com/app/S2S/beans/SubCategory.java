@@ -1,4 +1,4 @@
-package com.app.S2S.beans;
+ package com.app.S2S.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,9 +16,13 @@ public class SubCategory {
 	@GeneratedValue
 	private int id;
 	@Column
-	private String catDiscription;
+	private String mainCatId;
 	@Column
-	private String CatName;
+	private String catName;
+	@Column
+	private String catTitle;
+	@Column
+	private String catDiscription;
 	@Column
 	private String fileName;
 	@Column
@@ -26,15 +30,16 @@ public class SubCategory {
 	@Transient
 	public CommonsMultipartFile[] files;
 	public SubCategory(){}
-	public SubCategory(int id ,String catDiscription,String CatName,String fileName,String filePath){
+	public SubCategory(int id ,String catDiscription,String catName,String fileName,String filePath, String catTitle, String mainCatId){
 		this.catDiscription=catDiscription;
 		this.id=id;
-		this.CatName=CatName;
+		this.catName=catName;
 		this.fileName=fileName;
 		this.filePath=filePath;
-		
-		
+		this.catTitle=catTitle;
+		this.mainCatId=mainCatId;
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -48,10 +53,10 @@ public class SubCategory {
 		this.catDiscription = catDiscription;
 	}
 	public String getCatName() {
-		return CatName;
+		return catName;
 	}
 	public void setCatName(String catName) {
-		CatName = catName;
+		this.catName = catName;
 	}
 	public String getFileName() {
 		return fileName;
@@ -70,6 +75,18 @@ public class SubCategory {
 	}
 	public void setFiles(CommonsMultipartFile[] files) {
 		this.files = files;
+	}
+	public String getCatTitle() {
+		return catTitle;
+	}
+	public void setCatTitle(String catTitle) {
+		this.catTitle = catTitle;
+	}
+	public String getMainCatId() {
+		return mainCatId;
+	}
+	public void setMainCatId(String mainCatId) {
+		this.mainCatId = mainCatId;
 	}
 
 }

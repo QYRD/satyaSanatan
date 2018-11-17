@@ -20,7 +20,8 @@ $(document).ready(function(){
 	 $('#confirm').modal('show');  
  	});
 });
- function getdata(id){
+
+function getdata(id){
      var id = id;  
 	$.ajax({
 		
@@ -57,7 +58,6 @@ function deletedata(id) {
 		success : function(response) {
 			alert("Entry Deleted Successfully")
 			location.reload();
-
 		},
 		error : function(request, status, error) {
 			alert(request.responseText);
@@ -208,10 +208,10 @@ function deletedata(id) {
                                     <small class="form-text text-muted">ex. (999) 999-9999</small>
                                 </div>
                                 <div class="form-group">
-                                    <label class=" form-control-label">Category Discription</label>
+                                    <label class=" form-control-label">Category Description</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-                                <textarea type="text" name="catDiscription" class="form-control" rows="3" ></textarea>
+                                <textarea name="catDiscription" class="form-control" rows="3" ></textarea>
                                         
                                     </div>
                                     <small class="form-text text-muted">Maximum 100 Words</small>
@@ -269,7 +269,9 @@ function deletedata(id) {
                   	<a role="button" onclick="getdata('${a.id}')"><i class="fa fa-edit" style="font-size:24px"></i></a>
 					&nbsp;&nbsp;&nbsp;
                   	<a role="button" onclick="deletedata('${a.id}')"><i class="fa fa-trash-o" style="font-size:24px"></i></a>
-					
+					&nbsp;&nbsp;&nbsp;
+                  	<a href="Add-Sub-Category?id=${a.id}" style="color:#222"><i class="fa fa-external-link" style="font-size:24px"></i></a>
+                  						
                   	</td>
 														
                     </tr>
@@ -354,19 +356,24 @@ function deletedata(id) {
 
 <!-- Modal end-->
 
+  <!-- Modal -->
   <div class="modal fade" id="confirm" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
           <h3>Updated Successfully!</h3>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-                                        
         </div>
       </div>
       
+    </div>
   </div>
 
 

@@ -10,6 +10,7 @@ import com.app.S2S.beans.AddUserDocument;
 import com.app.S2S.beans.ContactUs;
 import com.app.S2S.beans.LoginDetails;
 import com.app.S2S.beans.Maicategory;
+import com.app.S2S.beans.SubCategory;
 import com.app.S2S.dao.SanatanDao;
 
 @Service
@@ -43,13 +44,7 @@ public void saveDocument(AddUserDocument addDoc) {
 	}
 
 @Override
-public void saveCategory(Maicategory mainCat) {
-	dao.saveCategory(mainCat);
-}
-
-@Override
-public List<Maicategory> getMainCategory() {
-	
+public List<Maicategory> getMainCategory() {	
 	return dao.getMainCategory();
 }
 
@@ -61,6 +56,33 @@ public void deleteMainCategory(int id) {
 public Maicategory getMainCategory(int id) {
 
 	return dao.getMainCategory(id);
+}
+
+@Override
+public void saveMainCategory(Maicategory maiCat) {
+	dao.saveMainCategory(maiCat);	
+}
+
+@Override
+public void saveSubCategory(SubCategory subCat) {
+	dao.saveSubCategory(subCat);		
+}
+
+
+@Override
+public List<SubCategory> getSubCategoryByID(String id) {
+System.out.println("Shikhar Chawla here is you List"+dao.getSubCategoryByID(id));
+	return dao.getSubCategoryByID(id);
+}
+
+@Override
+public void deleteSubCategory(int id) {
+	dao.deleteSubCategory(id);	
+}
+
+@Override
+public SubCategory getSubCategory(int id) {
+	return dao.getSubCategory(id);
 }
 
 

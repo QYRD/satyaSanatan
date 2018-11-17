@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
     
 <html lang="en">
   <head>
@@ -8,17 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Veda Project</title>
+    <title>About Us</title>
 
     <!-- Bootstrap -->
-     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/veda.css">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+ <link rel="stylesheet" type="text/css" href="css/veda.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
    
   </head>
   <body  style="font-family: 'Quicksand', sans-serif;">
@@ -34,13 +30,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="home.html"><img class="img-responsive" src="image/adi-shankara-logo.png" width="100%"></a>
+      <a class="navbar-brand" href="home.html"><img class="img-responsive" src="img/adi-shankara-logo.png" width="100%"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">   
      
       <ul class="nav navbar-nav navbar-right">
+	      <li class="courselist_link"><a href="home">Home</a></li>
 	      <li class="courselist_link"><a href="About_Us">About</a></li>
 	      <li class="courselist_link"><a href="Contact_US">Contact Us</a></li>
 	      <li class="courselist_link"><a href="Upload_document">Upload File</a></li>
@@ -116,17 +113,26 @@
 </div>
 
 <div class="veda-footer">
+<div class="container">
 	<div class="footer">
 		<p>© Copyright 2018. All Rights Reserved.</p>
 	</div>
 </div>
+</div>
 
+<style>
+
+.navbar-default .navbar-nav > li > a{
+	color:#fff;
+	font-size:18px;
+}
+
+</style>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
      <script src="js/bootstrap.js"></script>
      <!-- <script>
      	window.onload=function(){if(window.jQuery){$(document).ready(function(){$(".sidebarNavigation .navbar-collapse").hide().clone().appendTo("body").removeAttr("class").addClass("sideMenu").show();$("body").append("<div class='overlay'></div>");$(".navbar-toggle, .navbar-toggler").on("click",function(){$(".sideMenu").addClass($(".sidebarNavigation").attr("data-sidebarClass"));$(".sideMenu, .overlay").toggleClass("open");$(".overlay").on("click",function(){$(this).removeClass("open");$(".sideMenu").removeClass("open")})});$("body").on("click",".sideMenu.open .nav-item",function(){if(!$(this).hasClass("dropdown")){$(".sideMenu, .overlay").toggleClass("open")}});$(window).resize(function(){if($(".navbar-toggler").is(":hidden")){$(".sideMenu, .overlay").hide()}else{$(".sideMenu, .overlay").show()}})})}else{console.log("sidebarNavigation Requires jQuery")}}
