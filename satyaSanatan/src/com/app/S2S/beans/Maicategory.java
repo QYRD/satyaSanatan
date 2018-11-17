@@ -17,7 +17,7 @@ public class Maicategory {
 	@GeneratedValue
 	private int id;
 	@Column
-	private String CatName;
+	private String catName;
 	@Column
 	private String catTitle;
 	@Column
@@ -34,7 +34,7 @@ public class Maicategory {
 	public Maicategory(int id ,String catDiscription,String CatName,String fileName,String filePath,String catTitle){
 		this.catDiscription=catDiscription;
 		this.id=id;
-		this.CatName=CatName;
+		this.catName=catName;
 		this.fileName=fileName;
 		this.filePath=filePath;
 		this.catTitle=catTitle;
@@ -53,10 +53,10 @@ public class Maicategory {
 		this.catDiscription = catDiscription;
 	}
 	public String getCatName() {
-		return CatName;
+		return catName;
 	}
 	public void setCatName(String catName) {
-		CatName = catName;
+		this.catName = catName;
 	}
 	public String getFileName() {
 		return fileName;

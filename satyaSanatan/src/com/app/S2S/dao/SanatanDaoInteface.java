@@ -15,4 +15,7 @@ public interface SanatanDaoInteface {
 	public void saveDocument(AddUserDocument addDoc);
 	public void saveCategory(Maicategory mainCat);
 	public List<Maicategory> getMainCategory();
+	public Maicategory getMainCategory(int id);
+	public void deleteMainCategory(int id);
+
 }

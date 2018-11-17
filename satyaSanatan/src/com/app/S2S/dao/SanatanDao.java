@@ -56,6 +56,27 @@ sessionFactory.getCurrentSession().saveOrUpdate(contact);
 	List<Maicategory> ls = ((org.hibernate.query.Query) query).list();
 		return ls;
 	}
+	public void deleteMainCategory(int id)
+	{
+	    try
+	    {           
+	    	System.out.println("Hello id is "+id);
 
+	    	Query query=sessionFactory.getCurrentSession().createQuery("delete from Maicategory where id=:val");  
+	        query.setParameter("val", id);
+	        query.executeUpdate();
+
+	        
+	    }
+	    catch(Exception e)
+	    {
+	        e.printStackTrace();
+	    }
+   
+}
+	@Override
+	public Maicategory getMainCategory(int id) {
+			return sessionFactory.getCurrentSession().get(Maicategory.class,id);
+	}
     
 }

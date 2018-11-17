@@ -15,4 +15,6 @@ public interface UserData {
 	public void saveDocument(AddUserDocument addDoc);
 	public void saveCategory(Maicategory mainCat);
 	public List<Maicategory> getMainCategory();
+	public void deleteMainCategory(int id);
+	public Maicategory getMainCategory(int id);
 }

@@ -24,7 +24,6 @@ import com.app.S2S.beans.Maicategory;
 
 @Controller
 public class AdminController {
-	private static final String AddCategory = null;
 	@Autowired
 	UserDataValue udv;
 	@Autowired
@@ -39,7 +38,6 @@ public class AdminController {
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public String ragistration(HttpServletRequest request) {
 		System.out.println("________________________"+fileURL);
-		//session.setAttribute("fileURL", fileURL);
 		System.out.println("h......");
 		return "home";
 	}
@@ -57,8 +55,12 @@ public class AdminController {
 		return "AddCategory";
 	}
 
+
+
 	@RequestMapping(value = "Add-Main-Category-Value", method = RequestMethod.POST)
 	public String addMainCategoryValue(HttpServletRequest request,@ModelAttribute("mainCat") Maicategory mainCat) {
+		System.out.println("Shikhar YOU ID IS "+mainCat.getId());
+		
 		try {
 			Maicategory mc=(Maicategory) s2s.saveFile(mainCat.getFiles(), path, mainCat, "newFile");
 		mainCat.setFileName(mc.getFileName());
@@ -70,8 +72,26 @@ public class AdminController {
 		}
 		List<Maicategory> ls = udv.getMainCategory();
 		request.setAttribute("maincatValues", ls);
-		System.out.println("-----------------------S2S----------------------------------");
 		return "AddCategory";
+	}
+
+	@RequestMapping(value = "deleteMainCat", method = RequestMethod.POST)
+	public @ResponseBody int deleteMainCat(HttpServletRequest request, @RequestParam("val") int id) {
+		int pas=0;
+		try{
+		System.out.println("hello"+id);
+		udv.deleteMainCategory(id);
+		
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return pas;
+
+	}
+
+	@RequestMapping(value = "Get-Main-Category", method = RequestMethod.POST)
+	public @ResponseBody Maicategory getMainCategory(HttpServletRequest request,@RequestParam("val") int id) {
+		return udv.getMainCategory(id);
 	}
 
 	
@@ -80,6 +100,7 @@ public class AdminController {
 		System.out.println("-----------------------S2S----------------------------------");
 		return "subCategory";
 	}
+
 	
 	@RequestMapping(value = "Contact_US", method = RequestMethod.GET)
 	public String contactUs(HttpServletRequest request) {
@@ -110,6 +131,11 @@ public class AdminController {
 		System.out.println("-----------------------S2S----------------------------------");
 		return "uploadDoc";
 	}
+	@RequestMapping(value = "Update-Main-Category", method = RequestMethod.POST)
+	public @ResponseBody int updateMainCategory(HttpServletRequest request,@RequestParam("val") String id) {
+		System.out.println("-----------------------S2S----------------------------------");
+		return 1;
+	}
 	@RequestMapping(value = "Upload_document_value", method = RequestMethod.POST)
 	public String uploadDocValue(HttpServletRequest request,@ModelAttribute("up") AddUserDocument up) {
 		try {
@@ -126,18 +152,7 @@ public class AdminController {
 	public String loginPerson(HttpServletRequest request,@ModelAttribute("login") LoginDetails login) {
 		System.out.println("-----------------------S2S----------------------------------");
 		List<LoginDetails>auth=udv.loginId(login);
-		return "dashboard";
+		return "AdminDashboard";
 	}
 	
-	@RequestMapping(value = "deleteUser", method = RequestMethod.POST)
-	public @ResponseBody int deleteUser(HttpServletRequest request, @RequestParam("val") String id) {
-		int pas=0;
-		try{
-		//dao.deleteStudent(id);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return pas;
-
-	}
 }

@@ -53,5 +53,15 @@ public List<Maicategory> getMainCategory() {
 	return dao.getMainCategory();
 }
 
+public void deleteMainCategory(int id) {
+	dao.deleteMainCategory(id);	
+}
+
+@Override
+public Maicategory getMainCategory(int id) {
+
+	return dao.getMainCategory(id);
+}
+
 
 }
