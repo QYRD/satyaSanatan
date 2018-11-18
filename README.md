@@ -1,0 +1,2 @@
+# satyaSanatan
+Project related spirituality
