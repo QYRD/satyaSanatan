@@ -2,6 +2,7 @@ package com.app.S2S.controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.app.S2S.beans.AddUserDocument;
 import com.app.S2S.beans.ContactUs;
 import com.app.S2S.service.S2SGenricClass;
+import com.app.S2S.service.SendMail;
 import com.app.S2S.service.UserDataValue;
 import com.app.S2S.beans.LoginDetails;
 import com.app.S2S.beans.Maicategory;
@@ -26,7 +28,7 @@ import com.app.S2S.beans.SubCategory;
 @Controller
 public class AdminController {
 	@Autowired
-	AdminController contrl;
+	SendMail sendmail;
 
 	@Autowired
 	UserDataValue udv;
@@ -37,7 +39,8 @@ public class AdminController {
 	String path;
 	@Value("${retrivepath}")
 	String fileURL;
-
+	
+	
 	private HttpSession session;
 
 	@RequestMapping(value = "home", method = RequestMethod.GET)
@@ -72,8 +75,8 @@ public class AdminController {
 		mainCat.setFileName(mc.getFileName());
 		mainCat.setFilePath(mc.getFilePath()); 
 		udv.saveMainCategory(mainCat);
-
-		} catch (InstantiationException | IllegalAccessException e) {
+		} 
+		catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
 		List<Maicategory> ls = udv.getMainCategory();
@@ -101,15 +104,14 @@ public class AdminController {
 
 	
 	@RequestMapping(value = "Add-Sub-Category", method = RequestMethod.GET)
-	public String addsubCategory(HttpServletRequest request) {	
-		request.setAttribute("val", request.getParameter("id"));
-		List<SubCategory> ls = udv.getSubCategoryByID(request.getParameter("id"));
+	public String addsubCategory(HttpServletRequest request,@RequestParam("id" ) int id) {	
+		List<SubCategory> ls = udv.getSubCategoryByID(id);
 		request.setAttribute("subcatValues", ls);
 		return "subCategory";
 	}
 
 	@RequestMapping(value = "Add-Sub-Category-Value", method = RequestMethod.POST)
-	public String addSubCategoryValue(HttpServletRequest request,@ModelAttribute("subCat") SubCategory subCat) {
+	public String addSubCategoryValue(HttpServletRequest request,@ModelAttribute("subCat") SubCategory subCat,@RequestParam("id") int id) {
 		try {
 			SubCategory sc=(SubCategory) s2s.saveFile(subCat.getFiles(), path, subCat, "newFile");
 		subCat.setFileName(sc.getFileName());
@@ -119,11 +121,10 @@ public class AdminController {
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		String id=request.getParameter("val");
-		request.setAttribute("val", request.getParameter("id"));
-		List<SubCategory> ls = udv.getSubCategoryByID(request.getParameter("id"));
+		
+		List<SubCategory> ls = udv.getSubCategoryByID(id);
 		request.setAttribute("subcatValues", ls);
-		return contrl.addsubCategory(request);
+		return "subCategory";
 	}
 	
 	@RequestMapping(value = "deleteSubCat", method = RequestMethod.POST)
@@ -150,9 +151,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "getContactUsInfo", method = RequestMethod.GET)
-	public String getContact(@ModelAttribute("contact") ContactUs contact,HttpServletRequest request) {
+	public String getContact(@ModelAttribute("contact") ContactUs contact,HttpServletRequest request) throws MessagingException {
 		System.out.println(contact.getName());
 		udv.saveContact(contact);
+		sendmail.sendMail("Thank You", "Thank You for your Feedback", contact.getEmail());
 		String msg= "thankyou";
 		request.setAttribute("msge",msg);
 		return "ContactUs";
@@ -189,9 +191,8 @@ public class AdminController {
 		System.out.println("-----------------------S2S----------------------------------");
 		return "uploadDoc";
 	}
-	@RequestMapping(value = "loginPerson", method = RequestMethod.GET)
+	@RequestMapping(value = "loginPerson", method = RequestMethod.POST)
 	public String loginPerson(HttpServletRequest request,@ModelAttribute("login") LoginDetails login) {
-		System.out.println("-----------------------S2S----------------------------------");
 		int value=udv.login(login);
 		if(value!=0)
 		{

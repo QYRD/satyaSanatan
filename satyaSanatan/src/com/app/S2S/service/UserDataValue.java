@@ -70,7 +70,7 @@ public void saveSubCategory(SubCategory subCat) {
 
 
 @Override
-public List<SubCategory> getSubCategoryByID(String id) {
+public List<SubCategory> getSubCategoryByID(int id) {
 System.out.println("Shikhar Chawla here is you List"+dao.getSubCategoryByID(id));
 	return dao.getSubCategoryByID(id);
 }

@@ -59,15 +59,26 @@
 
                     <h3 class="menu-title">Main Menu</h3><!-- /.menu-title -->
 
+                     <li>
+                        <a href="Add-Main-Category"> <i class="menu-icon fa fa-tasks"></i>Main Category</a>
+                        
+                    </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Main Category</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-sitemap"></i>Miscellaneous</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-tasks"></i><a href="#">Sub Category</a></li>
                             <li><i class="menu-icon fa fa-tasks"></i><a href="#">Sub Category</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#"> <i class="menu-icon fa fa-sitemap"></i>Miscellaneous</a>
+
+                       <a href="#"> <i class="menu-icon fa fa-sitemap"></i>Miscellaneous</a>
+<!--                         <ul class="sub-menu children dropdown-menu">
+                            <li><i class="menu-icon fa fa-tasks"></i><a href="#">Sub Category</a></li>
+                            <li><i class="menu-icon fa fa-tasks"></i><a href="#">Sub Category</a></li>
+                        </ul>
+ -->
+ 
+
                     </li>
                    
 

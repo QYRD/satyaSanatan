@@ -104,7 +104,7 @@ sessionFactory.getCurrentSession().saveOrUpdate(contact);
 	}
 
 	@Override
-	public List<SubCategory> getSubCategoryByID(String id) {
+	public List<SubCategory> getSubCategoryByID(int id) {
 		Query query = sessionFactory.getCurrentSession().createQuery("from SubCategory where mainCatId=:val" );
 		query.setParameter("val", id);
 		List<SubCategory> ls = ((org.hibernate.query.Query) query).list();

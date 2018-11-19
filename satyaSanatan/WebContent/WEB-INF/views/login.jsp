@@ -43,7 +43,7 @@ body#LoginForm{ background-image:url("img/geeta1.png"); background-repeat:no-rep
    <p>Please enter your email and password</p>
    </div>
     
-    <form id="Login" action="loginPerson"  method="get">
+    <form id="Login" action="loginPerson"  method="post">
 
         <div class="form-group">
             <input type="email" class="form-control" name="username" placeholder="Email Address">

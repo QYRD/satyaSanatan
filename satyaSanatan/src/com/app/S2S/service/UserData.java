@@ -25,5 +25,5 @@ public interface UserData {
 	public void saveSubCategory(SubCategory mainCat);
 	public void deleteSubCategory(int id);
 	public SubCategory getSubCategory(int id);
-	public List<SubCategory> getSubCategoryByID(String id);
+	public List<SubCategory> getSubCategoryByID(int id);
 }

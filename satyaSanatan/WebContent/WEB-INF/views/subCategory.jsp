@@ -178,7 +178,7 @@ function deletedata(id) {
                             </div>
                             
 					<form action="Add-Sub-Category-Value"  enctype="multipart/form-data" method="post">		
-									<input type="hidden" name="mainCatId" id="mainid" value="${id}"/>        								
+									<input type="hidden" name="mainCatId" id="mainid" value="${val}"/>        								
                             <div class="card-body card-block">
                                 <div class="form-group">
                                     <label class=" form-control-label">Category Name</label>
