@@ -36,7 +36,7 @@ function getdata(id){
 
 function deletedata(id) {
 	var r = confirm('Are you sure to DELETE Entry?');
-    if (r == true) {
+	if (r == true) {
 	$.ajax({
 		
 		type : 'POST',
@@ -177,8 +177,8 @@ function deletedata(id) {
                                 <strong>Add Category</strong> <small> (Sub)</small>
                             </div>
                             
-					<form action="Add-Sub-Category-Value"  enctype="multipart/form-data" method="post">		
-									<input type="hidden" name="mainCatId" id="mainid" value="${val}"/>        								
+					<form action="Add-Sub-Category-Value?val=${val}" enctype="multipart/form-data" method="post">		
+									<input type="hidden" name="mainCatId" value="${val}"/>        								
                             <div class="card-body card-block">
                                 <div class="form-group">
                                     <label class=" form-control-label">Category Name</label>
@@ -257,9 +257,10 @@ function deletedata(id) {
                     <td>${a.catDiscription}</td>
 
 					<td>					
-              	<a href="javascript:void(0);" onclick="getdata('${a.id}')"><i class="fa fa-edit" style="font-size:24px"></i></a>
+                  	<a role="button" onclick="getdata('${a.id}')"><i class="fa fa-edit" style="font-size:24px"></i></a>
 					&nbsp;&nbsp;&nbsp;
-              	<a href="javascript:void(0);" onclick="deletedata('${a.id}')"><i class="fa fa-trash-o" style="font-size:24px"></i></a>
+                  	<a role="button" onclick="deletedata('${a.id}')"><i class="fa fa-trash-o" style="font-size:24px"></i></a>
+
                       	</td>
 														
                     </tr>                    

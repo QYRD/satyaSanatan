@@ -16,7 +16,7 @@ public class SubCategory {
 	@GeneratedValue
 	private int id;
 	@Column
-	private String mainCatId;
+	private int mainCatId;
 	@Column
 	private String catName;
 	@Column
@@ -30,14 +30,14 @@ public class SubCategory {
 	@Transient
 	public CommonsMultipartFile[] files;
 	public SubCategory(){}
-	public SubCategory(int id ,String catDiscription,String catName,String fileName,String filePath, String catTitle, String mainCatId){
+	public SubCategory(int id ,String catDiscription,String catName,String fileName,String filePath, String catTitle, int mainCatId){
 		this.catDiscription=catDiscription;
 		this.id=id;
+		this.mainCatId=mainCatId;
 		this.catName=catName;
 		this.fileName=fileName;
 		this.filePath=filePath;
 		this.catTitle=catTitle;
-		this.mainCatId=mainCatId;
 	}
 
 	public int getId() {
@@ -82,10 +82,10 @@ public class SubCategory {
 	public void setCatTitle(String catTitle) {
 		this.catTitle = catTitle;
 	}
-	public String getMainCatId() {
+	public int getMainCatId() {
 		return mainCatId;
 	}
-	public void setMainCatId(String mainCatId) {
+	public void setMainCatId(int mainCatId) {
 		this.mainCatId = mainCatId;
 	}
 

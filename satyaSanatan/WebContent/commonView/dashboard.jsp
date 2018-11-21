@@ -71,12 +71,6 @@
                         </ul>
                     </li>
 
-                       <a href="#"> <i class="menu-icon fa fa-sitemap"></i>Miscellaneous</a>
-<!--                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-tasks"></i><a href="#">Sub Category</a></li>
-                            <li><i class="menu-icon fa fa-tasks"></i><a href="#">Sub Category</a></li>
-                        </ul>
- -->
  
 
                     </li>

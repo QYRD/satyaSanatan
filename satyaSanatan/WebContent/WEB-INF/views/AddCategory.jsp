@@ -57,8 +57,8 @@ function deletedata(id) {
 		dataType : 'JSON',
 		success : function(response) {
 			alert("Entry Deleted Successfully")
-			location.reload();
-		},
+			window.location = "Add-Main-Category";
+			},
 		error : function(request, status, error) {
 			alert(request.responseText);
 		}
@@ -255,6 +255,7 @@ function deletedata(id) {
                       					</tr>
                     </thead>
                     <tbody>
+
                     <c:forEach var="a" items="${maincatValues}">
                     <tr>
                     <td>

@@ -27,6 +27,7 @@ import com.app.S2S.beans.SubCategory;
 
 @Controller
 public class AdminController {
+
 	@Autowired
 	SendMail sendmail;
 
@@ -45,10 +46,20 @@ public class AdminController {
 
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public String ragistration(HttpServletRequest request) {
-		System.out.println("________________________"+fileURL);
-		System.out.println("h......");
+		List<Maicategory> ls = udv.getMainCategory();
+		request.setAttribute("maincatValues", ls);
 		return "home";
 	}
+	@RequestMapping(value = "Sub-Category", method = RequestMethod.GET)
+	public String dashbord(HttpServletRequest request,@RequestParam("val") int id) {
+		List<SubCategory> ls = udv.getSubCategoryByID(id);
+		Maicategory mainVal=udv.getMainCategory(id);
+		request.setAttribute("catName", mainVal.getCatName());
+		request.setAttribute("catDiscription", mainVal.getCatDiscription());
+		request.setAttribute("subcatValues", ls);
+		return "BrowsSubCategory";
+	}
+
 	@RequestMapping(value = "dashbord", method = RequestMethod.GET)
 	public String dashbord(HttpServletRequest request) {
 		System.out.println("-----------------------S2S----------------------------------");
@@ -64,7 +75,6 @@ public class AdminController {
 	public String addMainCategory(HttpServletRequest request,@ModelAttribute("mainCat") Maicategory mainCat) {
 		List<Maicategory> ls = udv.getMainCategory();
 		request.setAttribute("maincatValues", ls);
-		System.out.println("-----------------------S2S----------------------------------");
 		return "AddCategory";
 	}
 	
@@ -104,14 +114,15 @@ public class AdminController {
 
 	
 	@RequestMapping(value = "Add-Sub-Category", method = RequestMethod.GET)
-	public String addsubCategory(HttpServletRequest request,@RequestParam("id" ) int id) {	
+	public String addsubCategory(HttpServletRequest request,@RequestParam("id") int id) {	
 		List<SubCategory> ls = udv.getSubCategoryByID(id);
 		request.setAttribute("subcatValues", ls);
+		request.setAttribute("val", id);
 		return "subCategory";
 	}
 
 	@RequestMapping(value = "Add-Sub-Category-Value", method = RequestMethod.POST)
-	public String addSubCategoryValue(HttpServletRequest request,@ModelAttribute("subCat") SubCategory subCat,@RequestParam("id") int id) {
+	public String addSubCategoryValue(HttpServletRequest request,@ModelAttribute("subCat") SubCategory subCat,@RequestParam("val") int id) {
 		try {
 			SubCategory sc=(SubCategory) s2s.saveFile(subCat.getFiles(), path, subCat, "newFile");
 		subCat.setFileName(sc.getFileName());
@@ -121,9 +132,9 @@ public class AdminController {
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		
 		List<SubCategory> ls = udv.getSubCategoryByID(id);
 		request.setAttribute("subcatValues", ls);
+		request.setAttribute("val", id);
 		return "subCategory";
 	}
 	
