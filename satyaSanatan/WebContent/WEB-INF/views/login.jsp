@@ -2,7 +2,6 @@
    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
    
-<!DOCTYPE html>
 <html lang="en">
  <head>
 <meta charset="ISO-8859-1">
@@ -24,29 +23,28 @@ body#LoginForm{ background-image:url("img/geeta1.png"); background-repeat:no-rep
 </style>
 </head>
 <body id="LoginForm">
-<!-- <div class="alert alert-warning alert-dismissible fade in" style="left:-70px; top:10px; position:relative;">
-    	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
- -->
-<div class="container">
 
+<div class="container">
 <div class="login-form">
+
 <div class="main-div">
+     <c:if test="${errorMessage!=NULL}">
+  <div class="alert alert-danger alert-dismissible fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+   		 <strong>Login Failure!!</strong><p>${errorMessage}</p>
+  </div>
+     </c:if>	
     
     
     <div class="panel">
-     <c:if test="${errorMessage!=NULL}">
-         <div style="background-color:powderblue;">
-   		 <strong>Login Failure!!</strong><p>${errorMessage}</p>
- 		</div>
-     </c:if>	
    <h2>Admin Login</h2>
    <p>Please enter your email and password</p>
    </div>
     
-    <form id="Login" action="loginPerson"  method="post">
+    <form id="Login" action="loginPerson"  method="get">
 
         <div class="form-group">
-            <input type="email" class="form-control" name="username" placeholder="Email Address">
+            <input type="text" class="form-control" name="username" placeholder="Username">
         </div>
 
         <div class="form-group">

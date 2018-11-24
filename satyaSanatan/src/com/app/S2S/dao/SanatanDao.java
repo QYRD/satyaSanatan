@@ -27,11 +27,11 @@ sessionFactory.getCurrentSession().saveOrUpdate(contact);
 	public int login(LoginDetails l) {
 
 		int count = ((Long) sessionFactory.getCurrentSession()
-				.createQuery("select count(*) from LoginDetails where password='" + l.getPassword()
-						+ "' and username='" + l.getUsername() + "'  ")
+				.createQuery("select count(*) from LoginDetails where password= '"+l.getPassword()+"' and username= '"+l.getUsername()+"'")
 				.uniqueResult()).intValue();
 		return count;
-	} 
+	}
+	
 	@Override
 	public List<LoginDetails> loginId(LoginDetails l) {
 		Query query = sessionFactory.getCurrentSession()

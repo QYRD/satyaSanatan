@@ -1,6 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
+  
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,7 +33,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="home.html"><img class="img-responsive" src="img/adi-shankara-logo.png" width="100%"></a>
+      <a class="navbar-brand" href="home.html"><img class="img-responsive" src="img/adi-shankara-logo.png" width="47%"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -49,11 +52,12 @@
 
 <div class="uploading-are" style="margin-top: 3%">
  <div class="container">
+
     <div class="row">
         <div class="col-md-12">
           <p style="color: #222; font-size: 19px;">A Team of individual software developers who want to develop a platform to boost interest of this generation towards spirituality. The purpose is to create repository of Indian Texts and serve as a one stop shop of</p>
             <div class="well well-sm">
-                <form>
+                <form action="Upload_document_value">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -104,7 +108,6 @@
 </div>
 
 </div>
-
 <div class="veda-footer">
 <div class="container">
 	<div class="footer">

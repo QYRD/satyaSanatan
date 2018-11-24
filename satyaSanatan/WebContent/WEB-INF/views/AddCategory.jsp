@@ -12,6 +12,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script  type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
 
 $(document).ready(function(){  
  $('#update').click(function(){  
@@ -267,11 +270,11 @@ function deletedata(id) {
 
 					<td>
 					
-                  	<a role="button" onclick="getdata('${a.id}')"><i class="fa fa-edit" style="font-size:24px"></i></a>
+                  	<a role="button" onclick="getdata('${a.id}')" data-toggle="tooltip" title="Update"><i class="fa fa-edit" style="font-size:24px"></i></a>
 					&nbsp;&nbsp;&nbsp;
-                  	<a role="button" onclick="deletedata('${a.id}')"><i class="fa fa-trash-o" style="font-size:24px"></i></a>
+                  	<a role="button" onclick="deletedata('${a.id}')" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" style="font-size:24px"></i></a>
 					&nbsp;&nbsp;&nbsp;
-                  	<a href="Add-Sub-Category?id=${a.id}" style="color:#222"><i class="fa fa-external-link" style="font-size:24px"></i></a>
+                  	<a href="Add-Sub-Category?val=${a.id}" style="color:#222" data-toggle="tooltip" title="Expand"><i class="fa fa-external-link" style="font-size:24px"></i></a>
                   						
                   	</td>
 														

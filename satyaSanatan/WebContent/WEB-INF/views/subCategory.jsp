@@ -13,6 +13,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+
 function getdata(id){
     var id = id;  
 	$.ajax({
@@ -257,9 +262,9 @@ function deletedata(id) {
                     <td>${a.catDiscription}</td>
 
 					<td>					
-                  	<a role="button" onclick="getdata('${a.id}')"><i class="fa fa-edit" style="font-size:24px"></i></a>
+                  	<a role="button" onclick="getdata('${a.id}')" data-toggle="tooltip" title="Update"><i class="fa fa-edit" style="font-size:24px"></i></a>
 					&nbsp;&nbsp;&nbsp;
-                  	<a role="button" onclick="deletedata('${a.id}')"><i class="fa fa-trash-o" style="font-size:24px"></i></a>
+                  	<a role="button" onclick="deletedata('${a.id}')" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" style="font-size:24px"></i></a>
 
                       	</td>
 														
@@ -295,8 +300,9 @@ function deletedata(id) {
         <div class="modal-body">
                             <div class="card-body card-block">		
 		
-                    <form action="Add-Sub-Category-Value"  enctype="multipart/form-data" id="insertForm" method="post">
+					<form action="Add-Sub-Category-Value?val=${val}" enctype="multipart/form-data" method="post">		
 						<input type="hidden" name="id" id="catID"/>
+						<input type="hidden" name="mainCatId" value="${val}"/>        								
                                     <small class="form-text text-muted">ex. (999) 999-9999</small>
 							<div class="form-group">
                                     <label class=" form-control-label">Category Name</label>

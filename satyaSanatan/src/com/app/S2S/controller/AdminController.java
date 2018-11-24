@@ -114,7 +114,7 @@ public class AdminController {
 
 	
 	@RequestMapping(value = "Add-Sub-Category", method = RequestMethod.GET)
-	public String addsubCategory(HttpServletRequest request,@RequestParam("id") int id) {	
+	public String addsubCategory(HttpServletRequest request,@RequestParam("val") int id) {	
 		List<SubCategory> ls = udv.getSubCategoryByID(id);
 		request.setAttribute("subcatValues", ls);
 		request.setAttribute("val", id);
@@ -132,6 +132,7 @@ public class AdminController {
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
+		
 		List<SubCategory> ls = udv.getSubCategoryByID(id);
 		request.setAttribute("subcatValues", ls);
 		request.setAttribute("val", id);
@@ -199,12 +200,13 @@ public class AdminController {
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		System.out.println("-----------------------S2S----------------------------------");
+		String msg="HEllo my name is anthony gonsalwis!!!!!!!!!!!!!"; 
+		request.setAttribute("Success",msg);
 		return "uploadDoc";
 	}
-	@RequestMapping(value = "loginPerson", method = RequestMethod.POST)
+	@RequestMapping(value = "loginPerson", method = RequestMethod.GET)
 	public String loginPerson(HttpServletRequest request,@ModelAttribute("login") LoginDetails login) {
-		int value=udv.login(login);
+		int value=udv.login(login);		
 		if(value!=0)
 		{
 		List<LoginDetails>auth=udv.loginId(login);
@@ -214,5 +216,5 @@ public class AdminController {
 		}
 		request.setAttribute("errorMessage","Username or Password is incorrect." );
 		return "login";
-	}		
+	}
 }

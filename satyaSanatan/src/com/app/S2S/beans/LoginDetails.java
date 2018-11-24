@@ -51,6 +51,4 @@ public class LoginDetails {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-
 }
