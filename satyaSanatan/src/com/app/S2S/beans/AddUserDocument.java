@@ -27,6 +27,11 @@ public class AddUserDocument {
 	private String fileName;
 	@Column
 	private String filePath;
+	@Column
+	private String topic;
+	@Column
+	private String flag;
+
 	@Transient
 	public CommonsMultipartFile[] files;
 	public CommonsMultipartFile[] getFiles() {
@@ -35,7 +40,7 @@ public class AddUserDocument {
 	public void setFiles(CommonsMultipartFile[] files) {
 		this.files = files;
 	}
-	public AddUserDocument(int id,String name,String mobile,String mail,String fileDiscription,String fileName,String filePath){
+	public AddUserDocument(int id,String name,String mobile,String mail,String fileDiscription,String fileName,String filePath,String topic,String flag){
 		this.id=id;
 		this.name=name;
 		this.mobile=mobile;
@@ -43,6 +48,8 @@ public class AddUserDocument {
 		this.fileDiscription=fileDiscription;
 		this.fileName=fileName;
 		this.filePath=filePath;
+		this.topic=topic;
+		this.flag=flag;
 		
 	}
 	public int getId() {
@@ -81,11 +88,23 @@ public class AddUserDocument {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+	public String getTopic() {
+		return topic;
+	}
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
 	public String getFilePath() {
 		return filePath;
 	}
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
+	}
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 
 	public AddUserDocument()

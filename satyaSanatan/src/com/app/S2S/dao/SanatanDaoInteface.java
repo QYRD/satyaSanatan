@@ -7,6 +7,7 @@ import com.app.S2S.beans.ContactUs;
 import com.app.S2S.beans.LoginDetails;
 import com.app.S2S.beans.Maicategory;
 import com.app.S2S.beans.SubCategory;
+import com.app.S2S.beans.Topics;
 
 public interface SanatanDaoInteface {
 	
@@ -26,4 +27,13 @@ public interface SanatanDaoInteface {
 	public List<SubCategory> getSubCategoryByID(int id);
 	public SubCategory getSubCategory(int id);
 	
-}
+	public List<AddUserDocument> getUploadedDocument(); 	
+	public List<Topics> getTopic();
+	public void saveTopic(Topics tpc);
+	public void removeTopics(int id);
+
+	public List<AddUserDocument> showAcceptedFiles();
+	public AddUserDocument getdata(int id);
+	public List<AddUserDocument> showMisc();
+	public List<AddUserDocument> showDeclinedFiles();
+		}

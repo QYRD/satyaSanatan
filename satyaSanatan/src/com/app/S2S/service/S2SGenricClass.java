@@ -2,12 +2,19 @@ package com.app.S2S.service;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import com.itextpdf.text.pdf.codec.Base64.OutputStream;
 
 @Service
 public class S2SGenricClass {
@@ -57,4 +64,35 @@ public Object saveFile(CommonsMultipartFile[] file,String path ,Object vi,String
 		
 		
 	}
+
+
+public String DownloadDoc(HttpServletResponse response, String filePath) throws ServletException, IOException {
+			// reads input file from an absolute path
+			File downloadFile = new File(filePath);
+			FileInputStream inStream = new FileInputStream(downloadFile);
+		
+			// if you want to use a relative path to context root:
+		
+			// obtains ServletContext
+		
+			response.setContentLength((int) downloadFile.length());
+		
+			// forces download
+			response.setContentType("APPLICATION/OCTET-STREAM");   
+			response.setHeader("Content-Disposition","attachment; filename=\"" + downloadFile + "\"");
+		
+			// obtains response's output stream
+			ServletOutputStream outStream = response.getOutputStream();
+		
+			byte[] buffer = new byte[4096];
+			int bytesRead = -1;
+		
+			while ((bytesRead = inStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+		
+			inStream.close();
+			outStream.close();
+			return filePath;
+		}
 }

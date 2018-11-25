@@ -11,6 +11,7 @@ import com.app.S2S.beans.ContactUs;
 import com.app.S2S.beans.LoginDetails;
 import com.app.S2S.beans.Maicategory;
 import com.app.S2S.beans.SubCategory;
+import com.app.S2S.beans.Topics;
 import com.app.S2S.dao.SanatanDao;
 
 @Service
@@ -82,6 +83,47 @@ public void deleteSubCategory(int id) {
 @Override
 public SubCategory getSubCategory(int id) {
 	return dao.getSubCategory(id);
+}
+
+public List<AddUserDocument> getUploadedDocument() {
+	return dao.getUploadedDocument();
+}
+
+@Override
+public List<Topics> getTopic() {
+	return dao.getTopic();
+}
+
+@Override
+public void saveTopic(Topics tpc) {
+	 dao.saveTopic(tpc);
+	
+}
+
+@Override
+public void removeTopics(int id) {
+	dao.removeTopics(id);	
+	
+}
+
+@Override
+public List<AddUserDocument> showAcceptedFiles() {
+	return dao.showAcceptedFiles();
+}
+
+@Override
+public AddUserDocument getdata(int id) {
+	return dao.getdata(id);
+}
+
+@Override
+public List<AddUserDocument> showMisc() {
+	return dao.showMisc();
+}
+
+@Override
+public List<AddUserDocument> showDeclinedFiles() {
+	return dao.showDeclinedFiles();
 }
 
 

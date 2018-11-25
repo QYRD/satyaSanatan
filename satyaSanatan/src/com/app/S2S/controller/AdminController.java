@@ -24,6 +24,7 @@ import com.app.S2S.service.UserDataValue;
 import com.app.S2S.beans.LoginDetails;
 import com.app.S2S.beans.Maicategory;
 import com.app.S2S.beans.SubCategory;
+import com.app.S2S.beans.Topics;
 
 @Controller
 public class AdminController {
@@ -183,8 +184,34 @@ public class AdminController {
 	}
 	@RequestMapping(value = "Upload_document", method = RequestMethod.GET)
 	public String uploadDoc(HttpServletRequest request) {
-		System.out.println("-----------------------S2S----------------------------------");
+		List<Topics> ls = udv.getTopic();
+		request.setAttribute("getTopic", ls);
 		return "uploadDoc";
+	}
+	@RequestMapping(value = "Add-Topic", method = RequestMethod.GET)
+	public String addTopic(HttpServletRequest request) {
+		List<Topics> ls = udv.getTopic();
+		request.setAttribute("getTopic", ls);
+		return "AddTopic";
+	}
+	@RequestMapping(value = "Add-Topic-Value", method = RequestMethod.POST)
+	public String addTopicValue(HttpServletRequest request,@ModelAttribute("tpc") Topics tpc) {
+		udv.saveTopic(tpc);
+		List<Topics> ls = udv.getTopic();
+		request.setAttribute("getTopic", ls);
+		return "AddTopic";
+	}
+
+	@RequestMapping(value = "deleteTopics", method = RequestMethod.POST)
+	public @ResponseBody int deleteTopics(HttpServletRequest request, @RequestParam("val") int id) {
+		int pas=0;
+		try{
+		udv.removeTopics(id);
+		
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return pas;
 	}
 	@RequestMapping(value = "Update-Main-Category", method = RequestMethod.POST)
 	public @ResponseBody int updateMainCategory(HttpServletRequest request,@RequestParam("val") String id) {
@@ -192,16 +219,28 @@ public class AdminController {
 		return 1;
 	}
 	@RequestMapping(value = "Upload_document_value", method = RequestMethod.POST)
-	public String uploadDocValue(HttpServletRequest request,@ModelAttribute("up") AddUserDocument up) {
+	public String uploadDocValue(HttpServletRequest request, @ModelAttribute("up") AddUserDocument up) throws MessagingException {
 		try {
 			AddUserDocument ad=(AddUserDocument) s2s.saveFile(up.getFiles(), path, up, "newFile");
-		up.setFileName(ad.getFileName());
-		up.setFilePath(ad.getFilePath()); 
-		} catch (InstantiationException | IllegalAccessException e) {
+			up.setFileName(ad.getFileName());
+			System.out.println(up.getFileName());
+			up.setFilePath(ad.getFilePath());
+			up.setFlag("n");
+			System.out.println(up.getFilePath());
+			udv.saveDocument(up);
+			} 
+		catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
-		}
-		String msg="HEllo my name is anthony gonsalwis!!!!!!!!!!!!!"; 
-		request.setAttribute("Success",msg);
+			}
+		
+	    System.out.println("-----------------------S2S Sending Mail----------------------------------");
+	    String email=up.getMail();
+	    sendmail.sendMail("Delivary Message from SatyaSanatan", "Thank you for sumbit your Document. We will get back to you with in 72 hours", email);
+	    List<AddUserDocument> show= udv.getUploadedDocument();
+		request.setAttribute("AddUserDocument", show);
+		request.setAttribute("Success", 1);
+		List<Topics> ls = udv.getTopic();
+		request.setAttribute("getTopic", ls);
 		return "uploadDoc";
 	}
 	@RequestMapping(value = "loginPerson", method = RequestMethod.GET)
@@ -217,4 +256,55 @@ public class AdminController {
 		request.setAttribute("errorMessage","Username or Password is incorrect." );
 		return "login";
 	}
+
+	@RequestMapping(value="ShowMisc", method=RequestMethod.GET)
+	String ShowMisc(HttpServletRequest request){
+		List<AddUserDocument> show= udv.showMisc();
+		request.setAttribute("MiscList", show);
+
+		return"Miscellenous";
+	}
+	
+	@RequestMapping(value="Misc-Approve-Data",method=RequestMethod.POST)
+	public @ResponseBody int ApproveFile(HttpServletRequest request, @RequestParam ("val") int id)
+	{
+		int pos=0;
+		AddUserDocument ad=udv.getdata(id);
+		ad.setFlag("A");
+		System.out.println("Approve");
+		udv.saveDocument(ad);
+		List<AddUserDocument> list=udv.showMisc();
+		request.setAttribute("MiscList", list);
+		return pos;
+	}
+	
+	@RequestMapping(value = "Misc-Decline-Data", method = RequestMethod.POST)
+	public @ResponseBody int MiscDeclineData(HttpServletRequest request, @RequestParam("val") int id) 
+	{
+		int pas=0;
+			AddUserDocument ad=udv.getdata(id);
+		ad.setFlag("D");
+		System.out.println("Decline");
+		udv.saveDocument(ad);
+			List<AddUserDocument> show= udv.showMisc();
+		request.setAttribute("MiscList", show);
+		return pas;
+}
+	
+	@RequestMapping(value="showApprovedFiles", method=RequestMethod.GET)
+	public String showApprovedFiles(HttpServletRequest request)
+		{
+		List<AddUserDocument> list=udv.showAcceptedFiles();
+		request.setAttribute("AcceptedFIles", list);
+		return"AcceptedFiles";
+		}
+	
+	@RequestMapping(value="showDeclinedFiles", method=RequestMethod.GET)
+	public String showDeclinedFiles(HttpServletRequest request)
+		{
+		List<AddUserDocument> list=udv.showDeclinedFiles();
+		request.setAttribute("DeclinedFiles", list);
+		return"DeclinedFiles";
+		}
+
 }

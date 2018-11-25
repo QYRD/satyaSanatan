@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.app.S2S.beans.LoginDetails;
 import com.app.S2S.beans.Maicategory;
 import com.app.S2S.beans.SubCategory;
+import com.app.S2S.beans.Topics;
 import com.app.S2S.beans.AddUserDocument;
 import com.app.S2S.beans.ContactUs;
 @Repository
@@ -110,5 +111,68 @@ sessionFactory.getCurrentSession().saveOrUpdate(contact);
 		List<SubCategory> ls = ((org.hibernate.query.Query) query).list();
 		return ls;
 }
+	public List<AddUserDocument> getUploadedDocument() {
+		Query query = sessionFactory.getCurrentSession().createQuery("from AddUserDocument");
+		List<AddUserDocument> ls = ((org.hibernate.query.Query) query).list();
+		return ls;	
+	}
+	@Override
+	public List<Topics> getTopic() {
+		Query query = sessionFactory.getCurrentSession().createQuery("from Topics");
+		List<Topics> ls = ((org.hibernate.query.Query) query).list();
+		return ls;	
+	}
+	@Override
+	public void saveTopic(Topics tpc) {
+		sessionFactory.getCurrentSession().saveOrUpdate(tpc);			
+	}
+
+	public void removeTopics(int id)
+	{
+	    try
+	    {           
+	    	Query query=sessionFactory.getCurrentSession().createQuery("delete from Topics where id=:val");  
+	        query.setParameter("val", id);
+	        query.executeUpdate();        
+	    }
+	    catch(Exception e)
+	    {
+	        e.printStackTrace();
+	    }
+	
+}
+	@Override
+	public List<AddUserDocument> showMisc()
+	{
+		Query query=sessionFactory.getCurrentSession().createQuery("from AddUserDocument where flag<>'D' or flag<>'N'");
+		List<AddUserDocument> list=((org.hibernate.query.Query) query).list();
+		return list;
+	}
+	
+	@Override
+	public AddUserDocument getdata(int id)
+	{
+		return sessionFactory.getCurrentSession().get(AddUserDocument.class,id);
+	}
+	
+	@Override
+	public List<AddUserDocument> showAcceptedFiles()
+	{
+		String flag="A";
+	Query query=sessionFactory.getCurrentSession().createQuery("from AddUserDocument where Flag=:val");
+	query.setParameter("val", flag);
+	List<AddUserDocument> list=((org.hibernate.query.Query) query).list();
+	return list;
+	}
+	
+	public List<AddUserDocument> showDeclinedFiles()
+	{
+		String flag="D";
+		Query query=sessionFactory.getCurrentSession().createQuery("from AddUserDocument where Flag=:val");
+		query.setParameter("val", flag);
+		List<AddUserDocument> list=((org.hibernate.query.Query) query).list();
+		return list;
+
+	}
 
 }

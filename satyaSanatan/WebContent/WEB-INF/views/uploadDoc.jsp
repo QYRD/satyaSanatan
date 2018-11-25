@@ -1,14 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+      <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
-  
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
     <title>Upload Document</title>
 
     <!-- Bootstrap -->
@@ -52,12 +51,11 @@
 
 <div class="uploading-are" style="margin-top: 3%">
  <div class="container">
-
     <div class="row">
         <div class="col-md-12">
           <p style="color: #222; font-size: 19px;">A Team of individual software developers who want to develop a platform to boost interest of this generation towards spirituality. The purpose is to create repository of Indian Texts and serve as a one stop shop of</p>
             <div class="well well-sm">
-                <form action="Upload_document_value">
+                <form action="Upload_document_value" enctype="multipart/form-data" method="post">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -65,37 +63,50 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="fa fa-user fa-lg fa-fw" aria-hidden="true"></span>
                                 </span>
-                                <input type="name" class="form-control" autocomplete="off" id="name" placeholder="Enter Full Name" required="required" /></div>
+                                <input type="name" class="form-control" autocomplete="off" name="name" placeholder="Enter Full Name" required="required" /></div>
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></span>
                                 </span>
-                                <input type="email" class="form-control" autocomplete="off" id="email" placeholder="Enter Email Address" required="required" /></div>
+                                <input type="email" class="form-control" autocomplete="off" name="mail" placeholder="Enter Email Address" required="required" /></div>
                         </div>
                         <div class="form-group">
                             <label for="Mobilenumber">Mobile Number</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><span  class="fa fa-mobile fa-lg fa-fw" aria-hidden="true"></span>
                                 </span>
-                                <input type="mobile" class="form-control" autocomplete="off" maxlength="15" minlength="10" id="mobile" placeholder="Enter Mobile Number" required="required" /></div>
+                                <input type="mobile" class="form-control" autocomplete="off" maxlength="15" minlength="10" name="mobile" placeholder="Enter Mobile Number" required="required" /></div>
                         </div>
-                     
+                        
+                        <div class="form-group">
+                            <label for="Topic">Topic</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><span  class="fa fa-book" aria-hidden="true"></span></span>
+                                <select name="topic" class="form-control">
+									<option selected disabled>Choose Topic</option>
+									 <c:forEach var="a" items="${getTopic}">			 
+										<option>${a.topic}</option>
+									 </c:forEach>
+									 </select>
+                               </div>
+                        </div>
+                      
                         <div class="form-group">
                             <label class="newbtn blah" for="subject">Upload File</label>
-                            <input id="pic" class='pis' onchange="readURL(this);" type="file" accept=".png,.jpg,.jpeg,.pdf,.docx" >
+                            <input id="pic" class='pis' name="files" onchange="readURL(this);" type="file" accept=".png,.jpg,.jpeg,.pdf,.docx,.ppt" >
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Description</label>
-                            <textarea name="description" id="description" class="form-control" rows="9" cols="25" required="required"
+                            <textarea name="fileDiscription" class="form-control" rows="9" cols="25" required="required"
                                 placeholder="Write Description here.."></textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-success pull-right" id="btnContactUs">Submit</button>
+                        <button type="submit" class="btn btn-success pull-right" name="btnContactUs">Upload Document</button>
                         <button type="reset" value="Reset Form" onClick="this.form.reset()" class="btn btn-danger pull-right" id="btnDelete" style="margin-right:5px">Reset</button>
                     </div>
                     
@@ -108,6 +119,7 @@
 </div>
 
 </div>
+
 <div class="veda-footer">
 <div class="container">
 	<div class="footer">

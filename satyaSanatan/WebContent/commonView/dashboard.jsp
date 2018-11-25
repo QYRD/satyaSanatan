@@ -63,11 +63,16 @@
                         <a href="Add-Main-Category"> <i class="menu-icon fa fa-tasks"></i>Main Category</a>
                         
                     </li>
+                     <li>
+                        <a href="Add-Topic"> <i class="menu-icon fa fa-tasks"></i>Add Topic</a>
+                        
+                    </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-sitemap"></i>Miscellaneous</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-tasks"></i><a href="#">Sub Category</a></li>
-                            <li><i class="menu-icon fa fa-tasks"></i><a href="#">Sub Category</a></li>
+                            <li><i class="menu-icon fa fa-star"></i><a href="ShowMisc">Yet to Review</a></li>
+                            <li><i class="menu-icon fa fa-check"></i><a href="showApprovedFiles">Approved</a></li>
+                            <li><i class="menu-icon fa fa-ban"></i><a href="showDeclinedFiles">Declined</a></li>
                         </ul>
                     </li>
 

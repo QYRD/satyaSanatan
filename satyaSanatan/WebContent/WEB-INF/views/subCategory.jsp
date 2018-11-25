@@ -265,6 +265,7 @@ function deletedata(id) {
                   	<a role="button" onclick="getdata('${a.id}')" data-toggle="tooltip" title="Update"><i class="fa fa-edit" style="font-size:24px"></i></a>
 					&nbsp;&nbsp;&nbsp;
                   	<a role="button" onclick="deletedata('${a.id}')" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" style="font-size:24px"></i></a>
+                  	<a href="#" style="color:#222" data-toggle="tooltip" title="Expand"><i class="fa fa-external-link" style="font-size:24px"></i></a>
 
                       	</td>
 														
