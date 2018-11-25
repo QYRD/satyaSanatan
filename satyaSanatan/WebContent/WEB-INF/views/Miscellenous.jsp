@@ -90,7 +90,7 @@
 	<td>					
 	<input value="Approve" onclick="ApproveData('${a.id}')" type="submit" id="btnApprv" class="btn btn-info">
 	<input value="Decline" onclick="DeclineData('${a.id}')" type="submit" id="btndcln" class="btn btn-info">
-	<input value="Download" name="Download" type="submit" id="btnDown" class="btn btn-info">	
+	<input value="Download" onclick="DeclineData('${a.id}')" type="submit" id="btnDown" class="btn btn-info">	
 	</td> 
 	</tr>                    
     </c:forEach>

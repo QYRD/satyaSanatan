@@ -1,11 +1,16 @@
 package com.app.S2S.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
+import org.apache.tika.exception.TikaException;
+import org.apache.xmlbeans.XmlException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -15,12 +20,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.xml.sax.SAXException;
 
+import com.app.S2S.beans.AddContent;
 import com.app.S2S.beans.AddUserDocument;
 import com.app.S2S.beans.ContactUs;
 import com.app.S2S.service.S2SGenricClass;
 import com.app.S2S.service.SendMail;
 import com.app.S2S.service.UserDataValue;
+
+import oracle.net.aso.s;
+
 import com.app.S2S.beans.LoginDetails;
 import com.app.S2S.beans.Maicategory;
 import com.app.S2S.beans.SubCategory;
@@ -250,13 +260,44 @@ public class AdminController {
 		{
 		List<LoginDetails>auth=udv.loginId(login);
 		LoginDetails ld=auth.get(0);
-		session.setAttribute("userObj",ld.getId());
+		//session.setAttribute("userObj",ld.getId());
 		return "Dashboard";
 		}
 		request.setAttribute("errorMessage","Username or Password is incorrect." );
 		return "login";
 	}
-
+	@RequestMapping(value = "Add_contant", method = RequestMethod.GET)
+	public String Addcontant(HttpServletRequest request,@RequestParam("val") int id) {	
+		
+		request.setAttribute("val", id);
+		List<AddContent>slok=udv.getaddContent(id, "Sanskrit");
+		request.setAttribute("slok", slok);
+		return "AddContant";
+	}
+	@RequestMapping(value = "Add-Content-Value", method = RequestMethod.POST)
+	public String AddContentValue(HttpServletRequest request,@ModelAttribute("add")AddContent add) throws InstantiationException, IllegalAccessException, InvalidFormatException, OpenXML4JException, XmlException, TikaException, SAXException {	
+		AddContent add1=(AddContent) s2s.saveFile(add.getFiles(), path, add, "Contant");
+		try {
+			String value=s2s.readFile1(add1.getFilePath(),add1.getFileName());
+			String[] line=value.split("\\-");
+			for(String a:line)
+			{
+				AddContent val=new AddContent();
+				val.setFileDiscription(add.getFileDiscription());
+				val.setLanguage(add.getLanguage());
+				val.setsID(add.getsID());
+				System.err.println(a);
+				val.setFileDiscription(a);
+				udv.saveContant(val);
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		List<AddContent>slok=udv.getaddContent(add.getsID(), add.getLanguage());
+		request.setAttribute("slok", slok);
+		return "redirect:Add_contant?val="+add.getsID();
+	}
 	@RequestMapping(value="ShowMisc", method=RequestMethod.GET)
 	String ShowMisc(HttpServletRequest request){
 		List<AddUserDocument> show= udv.showMisc();

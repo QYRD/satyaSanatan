@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.S2S.beans.AddContent;
 import com.app.S2S.beans.AddUserDocument;
 import com.app.S2S.beans.ContactUs;
 import com.app.S2S.beans.LoginDetails;
@@ -124,6 +125,17 @@ public List<AddUserDocument> showMisc() {
 @Override
 public List<AddUserDocument> showDeclinedFiles() {
 	return dao.showDeclinedFiles();
+}
+
+@Override
+public List<AddContent> getaddContent(int id, String lang) {
+	return dao.getaddContent(id,lang);
+}
+
+@Override
+public void saveContant(AddContent a) {
+	dao.saveContant(a);	
+	
 }
 
 

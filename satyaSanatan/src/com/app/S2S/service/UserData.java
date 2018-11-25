@@ -2,6 +2,7 @@ package com.app.S2S.service;
 
 import java.util.List;
 
+import com.app.S2S.beans.AddContent;
 import com.app.S2S.beans.AddUserDocument;
 import com.app.S2S.beans.ContactUs;
 import com.app.S2S.beans.LoginDetails;
@@ -39,4 +40,7 @@ public interface UserData {
 	public List<AddUserDocument> showMisc();
 	public List<AddUserDocument> showDeclinedFiles();
 	
+	public List<AddContent> getaddContent(int id ,String lang);
+	public void saveContant(AddContent a);
+
 }

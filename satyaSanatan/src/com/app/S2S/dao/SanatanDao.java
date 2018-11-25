@@ -11,6 +11,7 @@ import com.app.S2S.beans.LoginDetails;
 import com.app.S2S.beans.Maicategory;
 import com.app.S2S.beans.SubCategory;
 import com.app.S2S.beans.Topics;
+import com.app.S2S.beans.AddContent;
 import com.app.S2S.beans.AddUserDocument;
 import com.app.S2S.beans.ContactUs;
 @Repository
@@ -123,6 +124,11 @@ sessionFactory.getCurrentSession().saveOrUpdate(contact);
 		return ls;	
 	}
 	@Override
+	public void saveContant(AddContent a) {
+		 sessionFactory.getCurrentSession().saveOrUpdate(a);
+	}
+
+	@Override
 	public void saveTopic(Topics tpc) {
 		sessionFactory.getCurrentSession().saveOrUpdate(tpc);			
 	}
@@ -148,6 +154,14 @@ sessionFactory.getCurrentSession().saveOrUpdate(contact);
 		List<AddUserDocument> list=((org.hibernate.query.Query) query).list();
 		return list;
 	}
+	@Override
+	public List<AddContent> getaddContent(int id ,String lang) {
+		Query query = sessionFactory.getCurrentSession().createQuery("from AddContent where sID='"+id+"' and language='"+lang+"'");
+		List<AddContent> ls = ((org.hibernate.query.Query) query).list();
+		return ls;	
+	
+	}
+
 	
 	@Override
 	public AddUserDocument getdata(int id)

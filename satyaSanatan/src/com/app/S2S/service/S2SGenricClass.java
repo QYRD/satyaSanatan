@@ -5,16 +5,29 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-
+import org.apache.poi.POITextExtractor;
+import org.apache.poi.extractor.ExtractorFactory;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.tika.Tika;
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.txt.TXTParser;
+import org.apache.tika.sax.BodyContentHandler;
+import org.apache.xmlbeans.XmlException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
-import com.itextpdf.text.pdf.codec.Base64.OutputStream;
+import org.xml.sax.SAXException;
 
 @Service
 public class S2SGenricClass {
@@ -64,35 +77,45 @@ public Object saveFile(CommonsMultipartFile[] file,String path ,Object vi,String
 		
 		
 	}
+ public String readFile(String pathname) throws IOException {
 
+    File file = new File(pathname);
+    StringBuilder fileContents = new StringBuilder((int)file.length());        
 
-public String DownloadDoc(HttpServletResponse response, String filePath) throws ServletException, IOException {
-			// reads input file from an absolute path
-			File downloadFile = new File(filePath);
-			FileInputStream inStream = new FileInputStream(downloadFile);
-		
-			// if you want to use a relative path to context root:
-		
-			// obtains ServletContext
-		
-			response.setContentLength((int) downloadFile.length());
-		
-			// forces download
-			response.setContentType("APPLICATION/OCTET-STREAM");   
-			response.setHeader("Content-Disposition","attachment; filename=\"" + downloadFile + "\"");
-		
-			// obtains response's output stream
-			ServletOutputStream outStream = response.getOutputStream();
-		
-			byte[] buffer = new byte[4096];
-			int bytesRead = -1;
-		
-			while ((bytesRead = inStream.read(buffer)) != -1) {
-				outStream.write(buffer, 0, bytesRead);
-			}
-		
-			inStream.close();
-			outStream.close();
-			return filePath;
-		}
+    try (Scanner scanner = new Scanner(file)) {
+        while(scanner.hasNextLine()) {
+            fileContents.append(scanner.nextLine() + System.lineSeparator());
+        }
+        return fileContents.toString();
+        
+        
+       
+        
+    }
+}
+ public String readFile1(String pathname ,String name) throws IOException, InvalidFormatException, OpenXML4JException, XmlException, TikaException, SAXException {
+	 BodyContentHandler handler = new BodyContentHandler();
+	 AutoDetectParser parser = new AutoDetectParser();
+
+	 
+	    Metadata metadata = new Metadata();
+	   
+	 FileInputStream inputstream = new FileInputStream(new File(pathname));
+     ParseContext pcontext=new ParseContext();
+     
+     //Text document parser
+     TXTParser  TexTParser = new TXTParser();
+     TexTParser.parse(inputstream, handler, metadata,pcontext);
+     System.out.println("Contents of the document:" + handler.toString());
+     System.out.println("Metadata of the document:");
+     String[] metadataNames = metadata.names();
+     
+     for(String name1 : metadataNames) {
+        System.out.println(name1 + " : " + metadata.get(name));
+	
+     
+     
+ }
+     return handler.toString();
+}
 }

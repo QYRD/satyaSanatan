@@ -2,6 +2,7 @@ package com.app.S2S.dao;
 
 import java.util.List;
 
+import com.app.S2S.beans.AddContent;
 import com.app.S2S.beans.AddUserDocument;
 import com.app.S2S.beans.ContactUs;
 import com.app.S2S.beans.LoginDetails;
@@ -36,4 +37,7 @@ public interface SanatanDaoInteface {
 	public AddUserDocument getdata(int id);
 	public List<AddUserDocument> showMisc();
 	public List<AddUserDocument> showDeclinedFiles();
-		}
+
+	public void saveContant(AddContent a);
+	public List<AddContent> getaddContent(int id,String lang);
+}
