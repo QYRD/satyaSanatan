@@ -28,8 +28,8 @@ public interface UserData {
 	public void deleteSubCategory(int id);
 	public SubCategory getSubCategory(int id);
 	public List<SubCategory> getSubCategoryByID(int id);
-
 	public List<AddUserDocument> getUploadedDocument();
+	public List<AddUserDocument> getUserDocumentByTopic(String topic);
 
 	public List<Topics> getTopic();
 	public void saveTopic(Topics tpc);

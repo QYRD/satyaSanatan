@@ -28,7 +28,9 @@ public interface SanatanDaoInteface {
 	public List<SubCategory> getSubCategoryByID(int id);
 	public SubCategory getSubCategory(int id);
 	
+	public List<AddUserDocument> getUserDocumentByTopic(String topic);
 	public List<AddUserDocument> getUploadedDocument(); 	
+
 	public List<Topics> getTopic();
 	public void saveTopic(Topics tpc);
 	public void removeTopics(int id);

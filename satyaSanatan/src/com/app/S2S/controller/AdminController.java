@@ -41,7 +41,6 @@ public class AdminController {
 
 	@Autowired
 	SendMail sendmail;
-
 	@Autowired
 	UserDataValue udv;
 	@Autowired
@@ -61,6 +60,19 @@ public class AdminController {
 		request.setAttribute("maincatValues", ls);
 		return "home";
 	}
+	@RequestMapping(value = "Get-Topic", method = RequestMethod.GET)
+	public String topics(HttpServletRequest request) {
+		List<Topics> ls = udv.getTopic();
+		request.setAttribute("Topic", ls);
+		return "Topics";
+	}
+	@RequestMapping(value = "User-Uploads", method = RequestMethod.GET)
+	public String userUploads(HttpServletRequest request,@RequestParam("val") String topic) {
+		List<AddUserDocument> ls = udv.getUserDocumentByTopic(topic);
+		request.setAttribute("acceptedByTopic", ls);
+		return "UserUploads";
+	}
+
 	@RequestMapping(value = "Sub-Category", method = RequestMethod.GET)
 	public String dashbord(HttpServletRequest request,@RequestParam("val") int id) {
 		List<SubCategory> ls = udv.getSubCategoryByID(id);

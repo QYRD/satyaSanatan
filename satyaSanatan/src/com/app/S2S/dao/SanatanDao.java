@@ -150,7 +150,7 @@ sessionFactory.getCurrentSession().saveOrUpdate(contact);
 	@Override
 	public List<AddUserDocument> showMisc()
 	{
-		Query query=sessionFactory.getCurrentSession().createQuery("from AddUserDocument where flag<>'D' or flag<>'N'");
+		Query query=sessionFactory.getCurrentSession().createQuery("from AddUserDocument where flag<>'D' and flag<>'A'");
 		List<AddUserDocument> list=((org.hibernate.query.Query) query).list();
 		return list;
 	}
@@ -187,6 +187,13 @@ sessionFactory.getCurrentSession().saveOrUpdate(contact);
 		List<AddUserDocument> list=((org.hibernate.query.Query) query).list();
 		return list;
 
+	}
+	@Override
+	public List<AddUserDocument> getUserDocumentByTopic(String topic) {
+		Query query = sessionFactory.getCurrentSession().createQuery("from AddUserDocument where topic=:tpc and flag='A'" );
+		query.setParameter("tpc", topic);
+		List<AddUserDocument> ls = ((org.hibernate.query.Query) query).list();
+		return ls;
 	}
 
 }

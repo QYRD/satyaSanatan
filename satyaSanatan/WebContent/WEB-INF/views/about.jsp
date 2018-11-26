@@ -30,7 +30,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="home.html"><img class="img-responsive" src="img/adi-shankara-logo.png" width="100%"></a>
+      <a class="navbar-brand" href="home.html"><img class="img-responsive" src="img/adi-shankara-logo.png" width="47%"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -79,9 +79,9 @@
       <div class="card">
         <div class="box">
           <div class="img">
-            <img src="image/abhiteshmishra.png">
+            <img src="img/abhiteshmishra.png">
           </div>
-            <h2>Shri Abhitesh Mishra<br><span>Application Developer</span></h2>
+            <h2>Mr. Abhitesh Mishra<br><span>Application Developer</span></h2>
             <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.</p>
         </div>
       </div>
@@ -90,9 +90,9 @@
       <div class="card">
         <div class="box">
           <div class="img">
-            <img src="image/abhiteshmishra.png">
+            <img src="img/sakshammishra.jpg">
           </div>
-            <h2>Pradeep Chauhan<br><span>Web Graphic Designer</span></h2>
+            <h2>Mr. Saksham Mishra<br><span>Web Graphic Designer</span></h2>
             <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.</p>
         </div>
       </div>
@@ -101,9 +101,9 @@
       <div class="card">
         <div class="box">
           <div class="img">
-            <img src="image/abhiteshmishra.png">
+            <img src="img/abhiteshmishra.png">
           </div>
-            <h2>Pradeep Chauhan<br><span>Application Developer</span></h2>
+            <h2>Mr. Pradeep Chauhan<br><span>Back End Developer</span></h2>
             <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.</p>
         </div>
       </div>

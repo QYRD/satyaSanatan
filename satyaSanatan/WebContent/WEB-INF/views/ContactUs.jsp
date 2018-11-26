@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html lang="en">
   <head>
@@ -17,12 +16,35 @@
     
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway:100,600,400">
  
-   <style>
-
-.row h2, p {
-    color: #4e4a4a;
+<style>
+   
+body{
+transition: all 0.3s ease;
 }
+.row p {
+    color: #fff;
+}
+.row h2{
+color: #fff;
+font-weight:700;
+}
+label.control-label.col-sm-2{
+color:#fff;
+font-weight: normal;
+}
+
+input.form-control{
+background: transparent;
+color:#fff;
+}
+
+textarea.form-control{
+background: transparent;
+color:#fff;
+}
+
 .row h4, p {
     color: #4e4a4a;
 }
@@ -33,9 +55,10 @@
 }
 
    </style>
+ 
   </head>
   
-  <body style="font-family: 'Quicksand', sans-serif;">
+  <body style="font-family: 'Quicksand', sans-serif; background: url('img/geeta1.png'); background-repeat:no-repeat;background-size:cover; background-position:center;">
    
  <div id="header">
 <nav class="navbar navbar-default">
@@ -48,7 +71,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-     <a class="navbar-brand" href="home.html"><img class="img-responsive" src="img/adi-shankara-logo.png" width="100%"></a>
+     <a class="navbar-brand" href="home.html"><img class="img-responsive" src="img/adi-shankara-logo.png" width="47%"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -65,62 +88,60 @@
 </nav>
 </div>
 
-	<div class="container">
-		<div class="col-sm-12 col-md-12">
-			<div class="ved-text">
-				<!-- <p><b>Lorem Ipsum </b>is simply dummy text of the printing and <b>typesetting industry.</b> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p> -->
-			</div>
-		</div>
-		<div class="ved-category">
-		<div class="row">
-						<div class="col-sm-6" style="box-shadow: -1px 0px 4px 0px grey;height: 421px;" align="center">
-						<h2><span><i class="fa fa-home" style="font-size:30px"></i> Satya Sanatan</span></h2><br>
-						<h4><span><i class="fa fa-map-marker" style="font-size:30px"></i> Address xyz delhi sarkar - 110040 </span></h4>
-						<h4><span><i class="fa fa-envelope" style="font-size:25px"></i> abcabc@gmail.com</span></h4>
-						<h4><span><i class="fa fa-mobile" style="font-size:30px"></i> 9099909099,9099909099</span></h4>
-						</div>
+<c:if test="${msge!=NULL}">
+<h1 align="center" style="color:#fff;text-transform: capitalize;">${msge}</h1>
+</c:if>
 
-			<div class="col-sm-6" style="box-shadow: 0px 0px 4px 0px grey;">
-			<form class="form-horizontal" action="getContactUsInfo">
-			<div class="form-group" align="center" style="margin:20px ">
+<div class="container">
+	<div class="col-sm-12 col-md-12">
+		<div class="ved-text">
+
+	</div>
+</div>
+<div class="ved-category ved-text">
+<div class="row">
+<div class="col-sm-12 col-md-12">						
+<div class="col-md-12 col-sm-6" style="box-shadow: 2px -6px 31px 4px grey; background:#2a2c2ea6;">
+<form class="form-horizontal" action="getContactUsInfo">
+<div class="form-group" align="center" style="margin:20px ">
 			
     <h2>Contact Us</h2>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" for="name">Name:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" autocomplete="off" name="name" placeholder="Enter Name">
+    <div class="col-sm-9">
+      <input type="text" class="form-control" autocomplete="off" name="name" placeholder="Enter Name" required="required" >
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" for="email">Email:</label>
-    <div class="col-sm-10"> 
-      <input type="email" class="form-control" autocomplete="off" name="email" placeholder="Enter Email">
+    <div class="col-sm-9"> 
+      <input type="email" class="form-control" autocomplete="off" name="email" placeholder="Enter Email" required="required" >
     </div>
   </div>
     <div class="form-group">
     <label class="control-label col-sm-2" for="mobile">Mobile No:</label>
-    <div class="col-sm-10"> 
-      <input type="number" class="form-control" autocomplete="off" name="mobile" placeholder="Enter Mobile No">
+    <div class="col-sm-9"> 
+      <input type="mobile" class="form-control"  autocomplete="off" maxlength="10" minlength="10" name="phonenumber" placeholder="Enter Mobile No" required >
     </div>
   </div>
     <div class="form-group">
     <label class="control-label col-sm-2" for="query">Query:</label>
-    <div class="col-sm-10"> 
-      <textarea type="email" rows="4" class="form-control" name="query" placeholder="Enter Your Query"></textarea>
+    <div class="col-sm-9"> 
+      <textarea type="email" rows="4" class="form-control" name="query" placeholder="Enter Your Query" required="required"></textarea>
     </div>
   </div>
   <div class="form-group"> 
-    <div class="col-sm-offset-2 col-sm-10" align="center">
-      <button type="submit" class="btn btn-success">Submit</button>
+    <div class="col-sm-offset-2 col-sm-9" align="center">
+      <button type="submit" class="btn btn-info example2">Submit</button>
     </div>
   </div>
 </form>
-			
-			</div>
-			
-		</div>
-	</div>
+	
+</div>
+</div>
+</div>
+</div>
 </div>
 
 <div class="veda-footer">
@@ -132,13 +153,36 @@
 </div>
 
 
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
      <script src="js/bootstrap.js"></script>
-     <!-- <script>
-     	window.onload=function(){if(window.jQuery){$(document).ready(function(){$(".sidebarNavigation .navbar-collapse").hide().clone().appendTo("body").removeAttr("class").addClass("sideMenu").show();$("body").append("<div class='overlay'></div>");$(".navbar-toggle, .navbar-toggler").on("click",function(){$(".sideMenu").addClass($(".sidebarNavigation").attr("data-sidebarClass"));$(".sideMenu, .overlay").toggleClass("open");$(".overlay").on("click",function(){$(this).removeClass("open");$(".sideMenu").removeClass("open")})});$("body").on("click",".sideMenu.open .nav-item",function(){if(!$(this).hasClass("dropdown")){$(".sideMenu, .overlay").toggleClass("open")}});$(window).resize(function(){if($(".navbar-toggler").is(":hidden")){$(".sideMenu, .overlay").hide()}else{$(".sideMenu, .overlay").show()}})})}else{console.log("sidebarNavigation Requires jQuery")}}
-     </script> -->
+     <script src="js/jquery.preloaders.js"></script>
+  
+     
+     <script>
+        $(function(){
+
+          
+
+            // Advanced example
+            $('.example2').click(function(){
+
+                $.preloader.start({
+                    modal: true,
+                    src : 'img/sprites2.png'
+                });
+
+                setTimeout(function(){
+                    $.preloader.stop();
+                }, 3000);
+
+            });
+
+        });
+    </script>
+    
+   
+
   </body>
 </html>

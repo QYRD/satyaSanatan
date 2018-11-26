@@ -138,5 +138,10 @@ public void saveContant(AddContent a) {
 	
 }
 
+@Override
+public List<AddUserDocument> getUserDocumentByTopic(String topic) {
+	return dao.getUserDocumentByTopic(topic);
+}
+
 
 }

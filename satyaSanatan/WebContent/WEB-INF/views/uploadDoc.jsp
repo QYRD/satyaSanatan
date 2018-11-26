@@ -77,7 +77,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><span  class="fa fa-mobile fa-lg fa-fw" aria-hidden="true"></span>
                                 </span>
-                                <input type="mobile" class="form-control" autocomplete="off" maxlength="15" minlength="10" name="mobile" placeholder="Enter Mobile Number" required="required" /></div>
+                                <input type="mobile" class="form-control" autocomplete="off" maxlength="10" minlength="10" name="mobile" placeholder="Enter Mobile Number" required="required" /></div>
                         </div>
                         
                         <div class="form-group">

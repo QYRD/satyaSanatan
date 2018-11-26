@@ -114,15 +114,15 @@
 		<div class="ved-category">
 		<div class="row">
 			
-            <c:forEach var="a" items="${maincatValues}">
+            <c:forEach var="a" items="${acceptedByTopic}">
 			<div class="col-sm-1"></div>
 
 			<div class="col-sm-5">
 				<div class="cate-head col-sm-12">
 					<div class="ved-categ col-md-12" align="center">
-						<h2>${a.catName}</h2>
-						<p>${a.catDiscription}</p>
-						<a href="Sub-Category?val=${a.id}" class="btn btn-primary"> Read Now</a>
+						<h2>${a.topic}</h2>
+						<p>${a.fileDiscription}</p>						
+						<a href="#" class="btn btn-primary"> Read Now</a>
 					</div>
 				</div>
 			</div>
@@ -130,20 +130,9 @@
 
 			<div class="col-sm-1"></div>
 
-			<div class="col-sm-5">
-				<div class="cate-head3 col-sm-12 img-responsive">
-					<div class="ved-categ col-sm-12">
-						<h2>Miscellaneous</h2>
-						<p>Miscellaneous definition is - consisting of diverse things or members : heterogeneous. How to use miscellaneous in a sentence.</p>
-						<p><b>( other than above mentioned )</b></p>
-						<a href="Get-Topic" class="btn btn-primary"> Read Now</a>
-					</div>
-				</div>
-			</div>
+					<div class="col-sm-1"></div>
 
-			<div class="col-sm-1"></div>
 
-`
 		</div>
 	</div>
 </div>
